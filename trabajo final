@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+int main() {
+    int respuesta;
+    
+    printf("Programa de diagnóstico.\n");
+    
+    // Pregunta 1
+    printf("¿Tiene fiebre? (Ingrese 1 si sí, 0 si no): ");
+    scanf("%d", &respuesta);
+    
+    if (respuesta == 1) {
+        printf("Posible causa: Infección.\n");
+        printf("Solución: Descansar y beber líquidos.\n");
+    }
+    
+    // Pregunta 2
+    printf("¿Tiene dolor de cabeza? (Ingrese 1 si sí, 0 si no): ");
+    scanf("%d", &respuesta);
+    
+    if (respuesta == 1) {
+        printf("Posible causa: Estrés o tensión.\n");
+        printf("Solución: Descansar, relajarse y tomar analgésicos si es necesario.\n");
+    }
+    
+    // Pregunta 3
+    printf("¿Tiene tos persistente? (Ingrese 1 si sí, 0 si no): ");
+    scanf("%d", &respuesta);
+    
+    if (respuesta == 1) {
+        printf("Posible causa: Infección respiratoria.\n");
+        printf("Solución: Beber líquidos tibios y consultar a un médico si persiste.\n");
+    }
+    
+    // Pregunta 4
+    printf("¿Siente fatiga constante? (Ingrese 1 si sí, 0 si no): ");
+    scanf("%d", &respuesta);
+    
+    if (respuesta == 1) {
+        printf("Posible causa: Falta de sueño o estrés.\n");
+        printf("Solución: Dormir lo suficiente y practicar técnicas de relajación.\n");
+    }
+    
+    // Pregunta 5
+    printf("¿Tiene dolor de garganta? (Ingrese 1 si sí, 0 si no): ");
+    scanf("%d", &respuesta);
+    
+    if (respuesta == 1) {
+        printf("Posible causa: Infección en la garganta.\n");
+        printf("Solución: Gárgaras con agua tibia y sal, evitar alimentos fríos y consultar a un médico si persiste.\n");
+    }
+    
+    printf("Gracias por usar el programa de diagnóstico.\n");
+    
+    return 0;
+}
+
