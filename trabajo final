@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Nodo {
+    char sintoma[100];
+    char medicamento[100];
+    struct Nodo* si;
+    struct Nodo* no;
+} Nodo;
+
+Nodo* crearNodo(const char* sintoma, const char* medicamento) {
+    Nodo* nodo = (Nodo*)malloc(sizeof(Nodo));
+    strcpy(nodo->sintoma, sintoma);
+    strcpy(nodo->medicamento, medicamento);
+    nodo->si = NULL;
+    nodo->no = NULL;
+    return nodo;
+}
+
+Nodo* diagnosticar(Nodo* nodoActual) {
+    char respuesta[10];
+    printf("¿Tiene el siguiente síntoma? (%s): ", nodoActual->sintoma);
+    scanf("%s", respuesta);
+    
+    if (strcmp(respuesta, "si") == 0) {
+        if (nodoActual->si != NULL) {
+            return diagnosticar(nodoActual->si);
+        } else {
+            printf("Posible diagnóstico: %s\n", nodoActual->medicamento);
+        }
+    } else if (strcmp(respuesta, "no") == 0) {
+        if (nodoActual->no != NULL) {
+            return diagnosticar(nodoActual->no);
+        } else {
+            printf("No se pudo determinar un diagnóstico.\n");
+        }
+    } else {
+        printf("Respuesta no válida.\n");
+    }
+    
+    return NULL;
+}
+
+int main() {
+    Nodo* raiz = crearNodo("Fiebre", "Ibuprofeno");
+    raiz->si = crearNodo("Tos", "Jarabe para la tos");
+    raiz->no = crearNodo("Dolor de cabeza", "Paracetamol");
+    raiz->si->si = crearNodo("Dificultad para respirar", "Consulte a un médico");
+    raiz->si->no = crearNodo("Congestión nasal", "Descongestionante");
+    raiz->no->si = crearNodo("Náuseas", "Antiemético");
+    raiz->no->no = crearNodo("Cansancio", "Descanso");
+
+    printf("Bienvenido al sistema de diagnóstico. Responda 'si' o 'no' a las siguientes preguntas:\n");
+    diagnosticar(raiz);
+
+    free(raiz->si->si);
+    free(raiz->si->no);
+    free(raiz->no->si);
+    free(raiz->no->no);
+    free(raiz->si);
+    free(raiz->no);
+    free(raiz);
+
+    return 0;
+}
