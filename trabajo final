@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Paciente {
+    char sintomas[200];
+};
+
+void diagnosticarPaciente(const struct Paciente *paciente);
+
+int main() {
+    struct Paciente paciente;
+
+    printf("Bienvenido al sistema de diagnóstico médico\n");
+    printf("Ingrese los síntomas del paciente: ");
+    
+    fgets(paciente.sintomas, sizeof(paciente.sintomas), stdin);
+    paciente.sintomas[strcspn(paciente.sintomas, "\n")] = '\0';
+
+    diagnosticarPaciente(&paciente);
+
+    return 0;
+}
+
+void diagnosticarPaciente(const struct Paciente *paciente) {
+    printf("\nDiagnóstico:\nSíntomas: %s\n", paciente->sintomas);
+
+    if (strstr(paciente->sintomas, "fiebre") != NULL) {
+        printf("Diagnóstico: Posible infección.\nSolución: Descanso, líquidos y consultar a un médico.\n");
+    } else if (strstr(paciente->sintomas, "dolor de cabeza") != NULL) {
+        printf("Diagnóstico: Probable migraña.\nSolución: Descanso en un lugar tranquilo y analgésicos suaves.\n");
+    } else if (strstr(paciente->sintomas, "dolor de garganta") != NULL) {
+        printf("Diagnóstico: Posible infección de garganta.\nSolución: Gárgaras con agua tibia y sal, descanso vocal.\n");
+    } else if (strstr(paciente->sintomas, "tos") != NULL) {
+        printf("Diagnóstico: Posible infección respiratoria.\nSolución: Descanso, líquidos y consultar a un médico si persiste.\n");
+    } else {
+        printf("Diagnóstico: No se pudo determinar el diagnóstico. Se requiere más información.\nSolución: Consultar a un médico para un diagnóstico preciso.\n");
+    }
+}
